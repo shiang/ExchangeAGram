@@ -14,6 +14,7 @@
 		0428912F1A0976CD0080554B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0428912D1A0976CD0080554B /* LaunchScreen.xib */; };
 		0428913B1A0976CD0080554B /* ExchangeAGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428913A1A0976CD0080554B /* ExchangeAGramTests.swift */; };
 		042891451A09791C0080554B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042891441A09791C0080554B /* FeedViewController.swift */; };
+		042891471A097D160080554B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042891461A097D160080554B /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		042891391A0976CD0080554B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0428913A1A0976CD0080554B /* ExchangeAGramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAGramTests.swift; sourceTree = "<group>"; };
 		042891441A09791C0080554B /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		042891461A097D160080554B /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				042891211A0976CD0080554B /* AppDelegate.swift */,
 				042891441A09791C0080554B /* FeedViewController.swift */,
+				042891461A097D160080554B /* FeedCell.swift */,
 				042891281A0976CD0080554B /* Main.storyboard */,
 				0428912B1A0976CD0080554B /* Images.xcassets */,
 				0428912D1A0976CD0080554B /* LaunchScreen.xib */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				042891221A0976CD0080554B /* AppDelegate.swift in Sources */,
+				042891471A097D160080554B /* FeedCell.swift in Sources */,
 				042891451A09791C0080554B /* FeedViewController.swift in Sources */,
 				042891251A0976CD0080554B /* ExchangeAGram.xcdatamodeld in Sources */,
 			);
