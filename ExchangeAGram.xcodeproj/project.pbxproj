@@ -15,6 +15,7 @@
 		0428913B1A0976CD0080554B /* ExchangeAGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428913A1A0976CD0080554B /* ExchangeAGramTests.swift */; };
 		042891451A09791C0080554B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042891441A09791C0080554B /* FeedViewController.swift */; };
 		042891471A097D160080554B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042891461A097D160080554B /* FeedCell.swift */; };
+		042891491A0980B70080554B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042891481A0980B70080554B /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		0428913A1A0976CD0080554B /* ExchangeAGramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAGramTests.swift; sourceTree = "<group>"; };
 		042891441A09791C0080554B /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		042891461A097D160080554B /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		042891481A0980B70080554B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042891491A0980B70080554B /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		042891131A0976CD0080554B = {
 			isa = PBXGroup;
 			children = (
+				042891481A0980B70080554B /* MobileCoreServices.framework */,
 				0428911E1A0976CD0080554B /* ExchangeAGram */,
 				042891371A0976CD0080554B /* ExchangeAGramTests */,
 				0428911D1A0976CD0080554B /* Products */,
