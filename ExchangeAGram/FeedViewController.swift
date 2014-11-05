@@ -14,10 +14,17 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var feedArray:[AnyObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let request = NSFetchRequest(entityName: "FeedItem")
+        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        let context:NSManagedObjectContext = appDelegate.managedObjectContext!
+        feedArray = context.executeFetchRequest(request, error: nil)!
     }
 
     override func didReceiveMemoryWarning() {
