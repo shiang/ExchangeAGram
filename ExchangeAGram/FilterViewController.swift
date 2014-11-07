@@ -34,7 +34,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         collectionView.registerClass(FilterCell.self, forCellWithReuseIdentifier: "FilteringCell")
         self.view.addSubview(collectionView)
         
-        filters.photoFilters()
+        filters = photoFilters()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,14 +51,25 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell: FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("FilteringCell", forIndexPath: indexPath) as FilterCell
-        //cell.imageView.image = UIImage(named: "Placeholder")
-        cell.imageView.image = filteredImageFromImage(thisFeedItem.image, filter: filters[indexPath.row])
+        cell.imageView.image = UIImage(named: "Placeholder")
+        //cell.imageView.image = filteredImageFromImage(thisFeedItem.image, filter: filters[indexPath.row])
+        
+        //Use GCD to create a background thread for filtering process to avoid UI delay. Note to always update the UI on the main thread.
+        
+        let filterQueue:dispatch_queue_t = dispatch_queue_create("Filter queue", nil)
+        dispatch_async(filterQueue, { () -> Void in
+            let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                cell.imageView.image = filterImage
+            })
+        })
         return cell
     }
     
     //Helper Functions
     
-    func photoFilters () -> [CIFilter] {
+    func photoFilters() -> [CIFilter] {
         
         let blur = CIFilter(name: "CIGaussianBlur")
         let instant = CIFilter(name: "CIPhotoEffectInstant")
