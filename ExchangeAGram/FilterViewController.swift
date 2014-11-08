@@ -18,6 +18,8 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     var context:CIContext = CIContext(options: nil)
     
     var filters:[CIFilter] = []
+    
+    let placeHolderImage = UIImage(named: "Placeholder")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,19 +53,24 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell: FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("FilteringCell", forIndexPath: indexPath) as FilterCell
-        cell.imageView.image = UIImage(named: "Placeholder")
-        //cell.imageView.image = filteredImageFromImage(thisFeedItem.image, filter: filters[indexPath.row])
-        
-        //Use GCD to create a background thread for filtering process to avoid UI delay. Note to always update the UI on the main thread.
-        
-        let filterQueue:dispatch_queue_t = dispatch_queue_create("Filter queue", nil)
-        dispatch_async(filterQueue, { () -> Void in
-            let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+
+        if cell.imageView.image == nil {
+            cell.imageView.image = placeHolderImage
+            //cell.imageView.image = filteredImageFromImage(thisFeedItem.image, filter: filters[indexPath.row])
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                cell.imageView.image = filterImage
+            //Use GCD to create a background thread for filtering process to avoid UI delay. Note to always update the UI on the main thread.
+            
+            let filterQueue:dispatch_queue_t = dispatch_queue_create("Filter queue", nil)
+            dispatch_async(filterQueue, { () -> Void in
+                let filterImage = self.filteredImageFromImage(self.thisFeedItem.thumbNail, filter: self.filters[indexPath.row])
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    cell.imageView.image = filterImage
+                })
             })
-        })
+        }
+            
+      
         return cell
     }
     

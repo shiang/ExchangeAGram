@@ -81,6 +81,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         //Converting image to binary data since it can only be specified as such in the entity. Return image as NSData instance.
         let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let thumbNailData = UIImageJPEGRepresentation(image, 0.1)
         
         let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         
@@ -90,6 +91,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         feedItem.image = imageData
         feedItem.caption = "Test Caption"
+        feedItem.thumbNail = thumbNailData
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
