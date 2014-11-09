@@ -40,7 +40,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         filters = photoFilters()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,9 +74,20 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
             })
         })
         //}
-            
-      
         return cell
+    }
+    
+    //UICollectionView Delegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+        let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
+        self.thisFeedItem.image = imageData
+        let thumbNailData = UIImageJPEGRepresentation(filterImage, 0.1)
+        self.thisFeedItem.image = thumbNailData
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
     //Helper Functions
