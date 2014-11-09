@@ -56,21 +56,24 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         let cell: FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("FilteringCell", forIndexPath: indexPath) as FilterCell
 
-        if cell.imageView.image == nil {
-            cell.imageView.image = placeHolderImage
-            //cell.imageView.image = filteredImageFromImage(thisFeedItem.image, filter: filters[indexPath.row])
+        //if cell.imageView.image == nil {
+        cell.imageView.image = placeHolderImage
+        //cell.imageView.image = filteredImageFromImage(thisFeedItem.image, filter: filters[indexPath.row])
+        
+        //Use GCD to create a background thread for filtering process to avoid UI delay. Note to always update the UI on the main thread.
+        
+        let filterQueue:dispatch_queue_t = dispatch_queue_create("Filter queue", nil)
+        dispatch_async(filterQueue, { () -> Void in
+            //let filterImage = self.filteredImageFromImage(self.thisFeedItem.thumbNail, filter: self.filters[indexPath.row])
             
-            //Use GCD to create a background thread for filtering process to avoid UI delay. Note to always update the UI on the main thread.
+            //Use caching to get the filtered image instead of accessing the image with above line of code
+            let filterImage = self.getCachedImage(indexPath.row)
             
-            let filterQueue:dispatch_queue_t = dispatch_queue_create("Filter queue", nil)
-            dispatch_async(filterQueue, { () -> Void in
-                let filterImage = self.filteredImageFromImage(self.thisFeedItem.thumbNail, filter: self.filters[indexPath.row])
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    cell.imageView.image = filterImage
-                })
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                cell.imageView.image = filterImage
             })
-        }
+        })
+        //}
             
       
         return cell
@@ -139,20 +142,17 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
-    func getCachedImage(imageNumber : Int) -> UIImage {
+    func getCachedImage (imageNumber: Int) -> UIImage {
         let fileName = "\(imageNumber)"
-        let uniquePath = tmp.stringByAppendingPathExtension(fileName)
+        let uniquePath = tmp.stringByAppendingPathComponent(fileName)
+        var image:UIImage
         
-        var image: UIImage
-        
-        if NSFileManager.defaultManager().fileExistsAtPath(uniquePath!) {
-            image = UIImage(contentsOfFile: uniquePath!)!
-        }
-        else {
+        if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
+            image = UIImage(contentsOfFile: uniquePath)!
+        } else {
             self.cacheImage(imageNumber)
-            image = UIImage(contentsOfFile: uniquePath!)!
+            image = UIImage(contentsOfFile: uniquePath)!
         }
-        
         return image
     }
 }
