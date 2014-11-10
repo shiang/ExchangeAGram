@@ -80,13 +80,16 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     //UICollectionView Delegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
-        let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
-        self.thisFeedItem.image = imageData
-        let thumbNailData = UIImageJPEGRepresentation(filterImage, 0.1)
-        self.thisFeedItem.image = thumbNailData
-        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
-        self.navigationController?.popViewControllerAnimated(true)
+        
+        createAlertController()
+        
+//        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+//        let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
+//        self.thisFeedItem.image = imageData
+//        let thumbNailData = UIImageJPEGRepresentation(filterImage, 0.1)
+//        self.thisFeedItem.image = thumbNailData
+//        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+//        self.navigationController?.popViewControllerAnimated(true)
         
     }
     
@@ -137,6 +140,20 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         return finalImage
     }
+    
+    //UIAlertController Helper Functions
+    
+    func createAlertController () {
+        let alert = UIAlertController(title: "Photo options", message: "Please choose an option", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addTextFieldWithConfigurationHandler { (textfield) -> Void in
+            textfield.placeholder = "Add caption!"
+            textfield.secureTextEntry = false
+        }
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     
     //Cache functions
     

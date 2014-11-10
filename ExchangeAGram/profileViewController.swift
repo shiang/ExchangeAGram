@@ -40,8 +40,8 @@ class profileViewController: UIViewController, FBLoginViewDelegate {
         
         let userImageURL = "https://graph.facebook.com/\(user.objectID)/picture?type=small"
         let url = NSURL(string: userImageURL)
-        let imageData = NSData(contentsOfFile: url!)
-        let image = UIImage(data: imageData)
+        let imageData = NSData(contentsOfURL: url!)
+        let image = UIImage(data: imageData!)
         
         profileImageView.image = image
     }
