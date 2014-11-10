@@ -151,6 +151,35 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
             textfield.secureTextEntry = false
         }
         
+        //grab the text that user inputs
+        var text:String
+        let textfield = alert.textFields![0] as UITextField
+        
+        //Check if user actually input any texts
+        if textfield.text != nil {
+            text = textfield.text
+        }
+        
+        //Add alert actions
+        
+        let photoAction = UIAlertAction(title: "Post photo to Facebook with Caption", style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
+        
+        }
+        
+        alert.addAction(photoAction)
+        
+        let saveFilterAction = UIAlertAction(title: "Save filter without posting to Facebook", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            
+        }
+        
+        alert.addAction(saveFilterAction)
+        
+        let cancelAction = UIAlertAction(title: "Select another filter", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+            
+        }
+        
+        alert.addAction(cancelAction)
+        
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
