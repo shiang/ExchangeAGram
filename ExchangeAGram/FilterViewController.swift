@@ -188,6 +188,10 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
 
     }
     
+    func shareToFacebook (indexPath: NSIndexPath) {
+        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+    }
+    
     //Cache functions
     
     func cacheImage(imageNumber: Int) {
