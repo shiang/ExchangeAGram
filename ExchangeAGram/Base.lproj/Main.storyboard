@@ -100,6 +100,16 @@
                                 <rect key="frame" x="50" y="300" width="200" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05F-r4-mdC">
+                                <rect key="frame" x="10" y="220" width="140" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.54766233760000005" blue="0.085780272089999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Map View">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mapViewButtonTapped:" destination="sqX-Vg-Q3f" eventType="touchUpInside" id="rKR-hF-EyS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -107,11 +117,38 @@
                         <outlet property="fbLoginView" destination="cc0-m5-kYF" id="ozg-MT-0Me"/>
                         <outlet property="nameLabel" destination="MlK-gu-84p" id="sg2-ir-qqK"/>
                         <outlet property="profileImageView" destination="JWo-4E-cca" id="bQN-0H-fLG"/>
+                        <segue destination="jx4-9l-lWu" kind="show" identifier="mapSegue" id="K6X-xw-nz7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWs-ns-2pK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1927" y="450"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="oWT-OL-4wi">
+            <objects>
+                <viewController id="jx4-9l-lWu" customClass="MapViewController" customModule="ExchangeAGram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rPt-4f-Onm"/>
+                        <viewControllerLayoutGuide type="bottom" id="pFG-7M-k3A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cwb-Lj-NEg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EXi-DZ-WZz">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="EXi-DZ-WZz" id="uv9-AS-Ngb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fIa-pe-25j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2615" y="450"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gNo-mq-bFO">
