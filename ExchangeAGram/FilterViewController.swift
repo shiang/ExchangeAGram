@@ -144,24 +144,30 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
         
         //grab the text that user inputs
-        var text:String
+//        var text:String
         let textfield = alert.textFields![0] as UITextField
         
-        //Check if user actually input any texts
-        if textfield.text != nil {
-            text = textfield.text
-        }
+        //Check if user actually input any texts. But commented out as we need to save the caption in both photoAction and SaveFilterAction below and can only declare the "text" variable inside the UIAlertAction or there will be an error "Variable "text" used before initialization."
+//        if textfield.text != nil {
+//            text = textfield.text
+//        }
         
         //Add alert actions
         
         let photoAction = UIAlertAction(title: "Post photo to Facebook with Caption", style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
-            self.saveFilterToCoreData(indexPath)
+            
+            self.shareToFacebook(indexPath)
+            var text = textfield.text
+            self.saveFilterToCoreData(indexPath, caption: text)
         }
         
         alert.addAction(photoAction)
         
         let saveFilterAction = UIAlertAction(title: "Save filter without posting to Facebook", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-            self.saveFilterToCoreData(indexPath)
+            
+            self.shareToFacebook(indexPath)
+            var text = textfield.text
+            self.saveFilterToCoreData(indexPath, caption: text)
         }
         
         alert.addAction(saveFilterAction)
@@ -176,12 +182,16 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     //Create Helper function
-    func saveFilterToCoreData(indexPath: NSIndexPath) {
+    func saveFilterToCoreData(indexPath: NSIndexPath, caption: String) {
         let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
         let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
         self.thisFeedItem.image = imageData
+        
         let thumbNailData = UIImageJPEGRepresentation(filterImage, 0.1)
         self.thisFeedItem.image = thumbNailData
+        
+        self.thisFeedItem.caption = caption
+        
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         self.navigationController?.popViewControllerAnimated(true)
         
