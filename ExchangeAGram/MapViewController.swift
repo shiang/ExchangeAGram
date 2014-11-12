@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
         
         if itemArray!.count > 0 {
             for item in itemArray! {
-                let location = CLLocationCoordinate2D(latitude: Double(item.latitude), longitude: Double(item.longtitude))
+                let location = CLLocationCoordinate2D(latitude: Double(item.latitude), longitude: Double(item.longitude))
                 let span = MKCoordinateSpanMake(0.05, 0.05)
                 let region = MKCoordinateRegionMake(location, span)
                 
@@ -42,7 +42,7 @@ class MapViewController: UIViewController {
             }
         }
         
-        //Refactor below using CoreData
+        //Refactor below with above code using CoreData
         
 //        let location = CLLocationCoordinate2D(latitude: 48.868639224587, longitude: 2.37119161036255)
 //        let span = MKCoordinateSpanMake(0.05, 0.05)
