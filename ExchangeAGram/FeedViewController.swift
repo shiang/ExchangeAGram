@@ -90,6 +90,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    @IBAction func profileViewButtonTapped(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("profileSegue", sender: nil)
+    }
+    
+    
     //UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
